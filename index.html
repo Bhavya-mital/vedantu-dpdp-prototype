@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DPDP Consent Prototype</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb}
+.phone{width:390px;max-width:100%;margin:20px auto;background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.15);overflow:hidden}
+.header{background:#ff0000;color:#fff;padding:18px;text-align:center;font-weight:bold}
+.screen{display:none;padding:22px}
+.screen.active{display:block}
+h2{margin-top:0}
+.card{background:#f7f7f7;border-radius:12px;padding:14px;margin:12px 0}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;background:#ff0000;color:#fff;font-size:16px;cursor:pointer;margin-top:16px}
+.btn.secondary{background:#ddd;color:#222}
+.toggle{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+input[type=checkbox]{transform:scale(1.4)}
+.progress{height:6px;background:#eee}
+.bar{height:100%;width:0;background:#ff0000;transition:.3s}
+.small{color:#666;font-size:14px}
+.success{font-size:46px;text-align:center}
+.metric{padding:10px;background:#eef7ff;border-radius:10px;margin:8px 0}
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="header">YouTube Privacy Center</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<section class="screen active">
+<h2>Welcome 👋</h2>
+<p>We're updating how we manage your personal data to comply with India's DPDP Act, 2023.</p>
+<button class="btn" onclick="next()">Continue</button>
+</section>
+
+<section class="screen">
+<h2>Essential Data</h2>
+<div class="card">
+<b>Required</b>
+<p class="small">Account security, login, fraud prevention and video history required for service delivery.</p>
+</div>
+<button class="btn" onclick="next()">Accept & Continue</button>
+</section>
+
+<section class="screen">
+<h2>Optional Personalization</h2>
+<div class="toggle">
+<div>
+<b>Personalized Recommendations</b>
+<div class="small">Use watch history to improve recommendations.</div>
+</div>
+<input type="checkbox" checked>
+</div>
+<div class="toggle">
+<div>
+<b>Personalized Ads</b>
+<div class="small">Relevant ads based on interests.</div>
+</div>
+<input type="checkbox">
+</div>
+<div class="toggle">
+<div>
+<b>Location Access</b>
+<div class="small">Recommend nearby content.</div>
+</div>
+<input type="checkbox">
+</div>
+<button class="btn" onclick="next()">Review Choices</button>
+</section>
+
+<section class="screen">
+<h2>Review Consent</h2>
+<div class="card">
+✔ Essential Data Collection<br>
+✔ Optional choices can be changed anytime.<br>
+✔ You may download or delete your data whenever you wish.
+</div>
+<button class="btn" onclick="next()">Confirm Consent</button>
+</section>
+
+<section class="screen">
+<div class="success">✅</div>
+<h2 style="text-align:center">Consent Recorded</h2>
+<p class="small" style="text-align:center">Your preferences have been saved.</p>
+<button class="btn" onclick="next()">Open Privacy Dashboard</button>
+</section>
+
+<section class="screen">
+<h2>Privacy Dashboard</h2>
+<div class="metric"><b>Consent Status:</b> Active</div>
+<div class="metric"><b>Data Shared:</b> Essential + Recommendations</div>
+<button class="btn" onclick="alert('Mock download started.')">Download My Data</button>
+<button class="btn secondary" onclick="alert('Consent withdrawn successfully.')">Withdraw Consent</button>
+<button class="btn secondary" onclick="alert('Delete request submitted.')">Delete My Data</button>
+</section>
+
+</div>
+
+<script>
+let i=0;
+const screens=document.querySelectorAll('.screen');
+const bar=document.getElementById('bar');
+function next(){
+ screens[i].classList.remove('active');
+ i=Math.min(i+1,screens.length-1);
+ screens[i].classList.add('active');
+ bar.style.width=((i)/(screens.length-1))*100+'%';
+}
+</script>
+</body>
+</html>
